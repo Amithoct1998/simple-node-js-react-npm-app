@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ati
+      POSTGRES_PASSWORD: ati1234
+    networks:
+      - backend
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    networks:
+      - backend
+
+
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ati
+      MONGO_INITDB_ROOT_PASSWORD: ati1234
+    networks:
+      - backend
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ati
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ati1234
+    ports:
+      - "8081:8081"
+    networks:
+      - backend
+
+networks:
+  backend:
+  frontend:
+
